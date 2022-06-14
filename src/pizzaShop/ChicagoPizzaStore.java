@@ -1,15 +1,25 @@
 package pizzaShop;
 
-public class ChicagoPizzaStore extends PizzaStore{
-    public Pizza createPizza(String item) {
+public class ChicagoPizzaStore extends PizzaStore {
+    @Override
+    protected Pizza createPizza(String item) {
+
+        Pizza pizza = null;
+        PizzaIngredientFactory ingredientFactory = new ChicagoIngredientFactory();
+
         if(item.equals("cheese")) {
-            return new ChicagoStyleCheesePizza();
+            pizza = new CheesePizza(ingredientFactory);
+            pizza.setName("시카고 스타일 치즈 피자");
         } else if (item.equals("veggie")) {
-            return new ChicagoStyleVeggiePizza();
+            pizza = new VeggiePizza(ingredientFactory);
+            pizza.setName("시카고 스타일 야채 피자");;
         } else if(item.equals("clam")) {
-            return new ChicagoStyleClamPizza();
+            pizza = new ClamPizza(ingredientFactory);
+            pizza.setName("시카고 스타일 조개 피자");
         } else if(item.equals("pepperoni")) {
-            return new ChicagoStylePepperoniPizza();
-        } else return null;
+            pizza = new PepperoniPizza(ingredientFactory);
+            pizza.setName("시카고 스타일 페페로니 피자");
+        }
+        return pizza;
     }
 }
